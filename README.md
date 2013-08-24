@@ -12,7 +12,7 @@ Simple spring application for managing Contacts
 
 for test restful API
 
- curl -v -H "Accept: application/<RESPONSE_TYPE>" http://<HOST>/restful/contact/<REST_METHOD>
+ curl -v -H "Accept: application/$RESPONSE_TYPE$" http://$HOST$/restful/contact/$REST_METHOD$
  
  RESPONSE_TYPE:
  - xml
@@ -20,4 +20,4 @@ for test restful API
  
  available REST_METHOS:
  - lsitdata GET - return all contacts
- - {id} GET - return contact by id
+ - id GET - return contact by id
