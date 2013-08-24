@@ -59,6 +59,4 @@ public class ContactController {
 		contactService.delete(contact);
 		logger.info("Contact deleted successfully");
 	}
-
-
 }

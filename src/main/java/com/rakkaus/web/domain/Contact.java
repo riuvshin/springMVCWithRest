@@ -19,6 +19,7 @@ public class Contact implements Serializable{
     private int    version;
     private String firstName;
     private String lastName;
+    private String role;
     private DateTime   birthDate;
 
     public Contact() {}
@@ -61,6 +62,16 @@ public class Contact implements Serializable{
     public void setLastName(String lastName){
         this.lastName = lastName;
     }
+    
+    @Column(name = "ROLE")
+    public String getRole(){
+        return this.role;
+    }
+
+    public void setRole(String role){
+        this.role = role;
+    }
+
 
     @Column(name = "BIRTH_DATE")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
@@ -73,6 +84,6 @@ public class Contact implements Serializable{
     }
 
     public String toString(){
-        return "Contact id: " + id + ", First name: " + firstName + ", Last name: " + lastName + ", birth day: " + birthDate;
+        return "Contact id: " + id + ", First name: " + firstName + ", Last name: " + lastName + ", birth day: " + birthDate + ", Role: " + role;
     }
 }
