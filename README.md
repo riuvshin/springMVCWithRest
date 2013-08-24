@@ -35,3 +35,9 @@ role=CONTACT_ROLE
 birthDate=D_O_B
 
 example: curl -v -X POST -d "firstName=TESTUSER&lastName=BLABLA&role=ADMIN&birthDate=1998-09-08" http://localhost:8080/restful/contact/create
+
+~~~ DELETE ~~~
+- <b>delete-contact{id}</b> - delete contact by id
+
+example: curl -v -X DELETE http://localhost:8080/restful/contact/delete-contact/1
+
