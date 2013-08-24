@@ -24,6 +24,13 @@ public class Contact implements Serializable{
 
     public Contact() {}
 
+    public Contact(String firstName, String lastName, String role, DateTime birthDate) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        setRole(role);
+        setBirthDate(birthDate);
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

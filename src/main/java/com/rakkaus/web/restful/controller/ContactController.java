@@ -1,5 +1,6 @@
 package com.rakkaus.web.restful.controller;
 
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import javax.ws.rs.FormParam;
 
 import com.rakkaus.web.domain.Contact;
 import com.rakkaus.web.domain.Contacts;
@@ -22,22 +24,27 @@ public class ContactController {
 	@Autowired
 	private ContactService contactService;
 
-	@RequestMapping(value = "/listdata", method = RequestMethod.GET)
+	@RequestMapping(value = "/all-contacts", method = RequestMethod.GET)
 	@ResponseBody
 	public Contacts listData() {
 		return new Contacts(contactService.findAll());
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/get-contact-by-id/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public Contact findContactById(@PathVariable Long id) {
 		return contactService.findById(id);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@ResponseBody
-	public Contact create(@RequestBody Contact contact) {
-		logger.info("Creating contact: " + contact);
+	public Contact create(
+            @FormParam("firstName") String firstName,
+            @FormParam("lastName") String lastName,
+            @FormParam("role") String role,
+            @FormParam("birthDate") DateTime birthDate) {
+		Contact contact = new Contact(firstName, lastName, role, birthDate);
+        logger.info("Creating contact: " + contact);
 		contactService.save(contact);
 		logger.info("Contact created successfully with info: " + contact);
 		return contact;
