@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Creation of array object in javascript using JSON</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(document).ready(function () {
+                $.getJSON("/restful/contact/all-contacts", function (data) {
+                            $.each(data.contacts, function (i, data) {
+                                var div_data = "<div>" + data.id + "</div>";
+                                $(div_data).appendTo("#id");
+                                var div_data = "<div>" + data.version + "</div>";
+                                $(div_data).appendTo("#version");
+                                var div_data = "<div>" + data.firstName + "</div>";
+                                $(div_data).appendTo("#firstName");
+                                var div_data = "<div>" + data.lastName + "</div>";
+                                $(div_data).appendTo("#lastName");
+                                var div_data = "<div>" + data.role + "</div>";
+                                $(div_data).appendTo("#role");
+                                var div_data = "<div>" + data.birthDate + "</div>";
+                                $(div_data).appendTo("#birthDate");
+                            });
+                        }
+                );
+                return false;
+            });
+        });
+    </script>
+</head>
+
+<body>
+<h2>Contacts application</h2>
+
+<div>
+    <table border="1">
+        <tr>
+                <th>id</th>
+                <th>version</th>
+                <th>first name</th>
+                <th>last name</th>
+                <th>role</th>
+                <th>birth date</th>
+        </tr>
+        <tr>
+            <td id="id"></td>
+            <td id="version"></td>
+            <td id="firstName"></td>
+            <td id="lastName"></td>
+            <td id="role"></td>
+            <td id="birthDate"></td>
+        </tr>
+
+    </table>
+</div>
+
+<div>
+    <form action="/restful/contact/create" method="post" >
+        <p>first name : <input type="text" name="firstName" /></p>
+        <p>last name : <input type="text" name="lastName" /></p>
+        <p>role : <input type="text" name="role" /></p>
+        <p>birth date : <input type="text" name="birthDate" /></p>
+        <input type="submit" value="Add User" />
+    </form>
+</div>
+
+<div>
+    <form action="/restful/contact/delete-contact" method="post" >
+        <p>used id : <input type="text" name="id" /></p>
+        <input type="submit" value="delete user" />
+    </form>
+</div>
+
+</body>
+</html>

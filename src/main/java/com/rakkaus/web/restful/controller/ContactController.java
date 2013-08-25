@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.FormParam;
+
 @Controller
 @RequestMapping(value = "/contact")
 public class ContactController {
@@ -33,19 +35,19 @@ public class ContactController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public Contact createNewContact(
-            @PathVariable("firstName") String firstName,
-            @PathVariable("lastName") String lastName,
-            @PathVariable("role") String role,
-            @PathVariable("birthDate") DateTime birthDate) {
+    public String createNewContact(
+            @FormParam("firstName") String firstName,
+            @FormParam("lastName") String lastName,
+            @FormParam("role") String role,
+            @FormParam("birthDate") DateTime birthDate) {
         Contact contact = new Contact(firstName, lastName, role, birthDate);
         logger.info("Creating contact: " + contact);
         contactService.save(contact);
         logger.info("Contact created successfully with info: " + contact);
-        return contact;
+       return "Created new contact: "+firstName + " " + lastName + " " + role + " " + birthDate;
     }
 
-    @RequestMapping(value = "update-contact/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/update-contact/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public void update(@RequestBody Contact contact, @PathVariable Long id) {
         logger.info("Updating contact: " + contact);
@@ -53,9 +55,9 @@ public class ContactController {
         logger.info("Contact updatet successfully with info: " + contact);
     }
 
-    @RequestMapping(value = "delete-contact/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete-contact", method = RequestMethod.POST)
     @ResponseBody
-    public String delete(@PathVariable Long id) {
+    public String delete(@FormParam("id") Long id) {
         logger.info("Deleting contact with id" + id);
         Contact contact = contactService.findById(id);
         String contactName = contact.getFirstName() + " " + contact.getLastName();
