@@ -36,8 +36,8 @@ birthDate=D_O_B
 
 example: curl -v -X POST -d "firstName=TESTUSER&lastName=BLABLA&role=ADMIN&birthDate=1998-09-08" http://localhost:8080/restful/contact/create
 
-~~~ DELETE ~~~
-- <b>delete-contact/{id}</b> - delete contact by id
+- <b>delete-contact</b> - delete contact by id, require form param:
+id={id}
 
-example: curl -v -X DELETE http://localhost:8080/restful/contact/delete-contact/1
+example: curl -v -X POST -d "id=1" http://localhost:8080/restful/contact/delete-contact
 
